@@ -9,6 +9,10 @@ class scoped_clearer
         ~scoped_clearer();
 
     private:
+        scoped_clearer(scoped_clearer const &); // disabled
+        scoped_clearer & operator=(scoped_clearer const &); // disabled
+
+    private:
         container & d_container;
 };
 
