@@ -1,0 +1,9 @@
+test line 1
+test line 2
+"quoted text"
+'quoted text'
+
+after empty line
+    
+after whitespace line
+
