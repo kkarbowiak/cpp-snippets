@@ -7,6 +7,9 @@ class intruder
     public:
         intruder();
 
+    protected:
+        ~intruder();
+
     public:
         T * prev;
         T * next;
@@ -17,6 +20,11 @@ template<class T>
 inline intruder<T>::intruder()
     : prev(0)
     , next(0)
+{
+}
+////////////////////////////////////////////////////////////////////////////////
+template<class T>
+inline intruder<T>::~intruder()
 {
 }
 ////////////////////////////////////////////////////////////////////////////////
