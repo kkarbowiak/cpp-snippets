@@ -1,5 +1,8 @@
 #include "duration_string.h"
 
+#include <sstream>
+#include <iomanip>
+
 
 ////////////////////////////////////////////////////////////////////////////////
 std::string to_string(std::chrono::hours hh)
@@ -9,41 +12,46 @@ std::string to_string(std::chrono::hours hh)
 ////////////////////////////////////////////////////////////////////////////////
 std::string to_string(std::chrono::minutes mm)
 {
-    return
-        to_string(std::chrono::duration_cast<std::chrono::hours>(mm))
-        + ":"
-        + std::to_string(mm.count() % 60);
+    std::ostringstream oss;
+    oss << to_string(std::chrono::duration_cast<std::chrono::hours>(mm));
+    oss << ":";
+    oss << std::setw(2) << std::setfill('0') << (mm.count() % 60);
+    return oss.str();
 }
 ////////////////////////////////////////////////////////////////////////////////
 std::string to_string(std::chrono::seconds ss)
 {
-    return
-        to_string(std::chrono::duration_cast<std::chrono::minutes>(ss))
-        + ":"
-        + std::to_string(ss.count() % 60);
+    std::ostringstream oss;
+    oss << to_string(std::chrono::duration_cast<std::chrono::minutes>(ss));
+    oss << ":";
+    oss << std::setw(2) <<  std::setfill('0') << (ss.count() % 60);
+    return oss.str();
 }
 ////////////////////////////////////////////////////////////////////////////////
 std::string to_string(std::chrono::milliseconds ms)
 {
-    return
-        to_string(std::chrono::duration_cast<std::chrono::seconds>(ms))
-        + "."
-        + std::to_string(ms.count() % 1000);
+    std::ostringstream oss;
+    oss << to_string(std::chrono::duration_cast<std::chrono::seconds>(ms));
+    oss << ".";
+    oss << std::setw(3) <<  std::setfill('0') << (ms.count() % 1000);
+    return oss.str();
 }
 ////////////////////////////////////////////////////////////////////////////////
 std::string to_string(std::chrono::microseconds us)
 {
-    return
-        to_string(std::chrono::duration_cast<std::chrono::seconds>(us))
-        + "."
-        + std::to_string(us.count() % 1000000);
+    std::ostringstream oss;
+    oss << to_string(std::chrono::duration_cast<std::chrono::seconds>(us));
+    oss << ".";
+    oss << std::setw(6) <<  std::setfill('0') << (us.count() % 1000000);
+    return oss.str();
 }
 ////////////////////////////////////////////////////////////////////////////////
 std::string to_string(std::chrono::nanoseconds ns)
 {
-    return
-        to_string(std::chrono::duration_cast<std::chrono::seconds>(ns))
-        + "."
-        + std::to_string(ns.count() % 1000000000);
+    std::ostringstream oss;
+    oss << to_string(std::chrono::duration_cast<std::chrono::seconds>(ns));
+    oss << ".";
+    oss << std::setw(9) <<  std::setfill('0') << (ns.count() % 1000000000);
+    return oss.str();
 }
 ////////////////////////////////////////////////////////////////////////////////
