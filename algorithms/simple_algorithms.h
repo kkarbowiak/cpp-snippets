@@ -8,6 +8,9 @@ namespace algo
 
     template<class InputIterator, class Predicate>
     bool any_true(InputIterator first, InputIterator last, Predicate pred);
+
+    template<class InputIterator, class Function, class Predicate>
+    Function for_each_if(InputIterator first, InputIterator last, Function fn, Predicate pred);
 }
 
 
@@ -38,6 +41,22 @@ inline bool any_true(InputIterator first, InputIterator last, Predicate pred)
     }
 
     return result;
+}
+////////////////////////////////////////////////////////////////////////////////
+template<class InputIterator, class Function, class Predicate>
+inline Function for_each_if(InputIterator first, InputIterator last, Function fn, Predicate pred)
+{
+    while (first != last)
+    {
+        if (pred(*first))
+        {
+            fn(*first);
+        }
+
+        ++first;
+    }
+
+    return fn;
 }
 ////////////////////////////////////////////////////////////////////////////////
 }
