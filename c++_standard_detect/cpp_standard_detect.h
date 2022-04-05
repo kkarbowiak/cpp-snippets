@@ -2,11 +2,11 @@
 #define CPP_STD_DETECT_H
 
 #if defined(_MSVC_LANG)
-    #if _MSVC_LANG >= 202002
+    #if _MSVC_LANG >= 202002L
         #define CPP_20_PRESENT
-    #elif _MSVC_LANG >= 201703
+    #elif _MSVC_LANG >= 201703L
         #define CPP_17_PRESENT
-    #elif _MSVC_LANG >= 201402
+    #elif _MSVC_LANG >= 201402L
         #define CPP_14_PRESENT
     #else
         #define CPP_11_PRESENT
