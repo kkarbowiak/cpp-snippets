@@ -33,7 +33,7 @@ std::string to_string(std::chrono::milliseconds ms)
     std::ostringstream oss;
     oss << to_string(std::chrono::duration_cast<std::chrono::seconds>(ms));
     oss << ".";
-    oss << std::setw(3) <<  std::setfill('0') << (ms.count() % 1000);
+    oss << std::setw(3) <<  std::setfill('0') << (ms.count() % std::chrono::milliseconds::period::den);
     return oss.str();
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -42,7 +42,7 @@ std::string to_string(std::chrono::microseconds us)
     std::ostringstream oss;
     oss << to_string(std::chrono::duration_cast<std::chrono::seconds>(us));
     oss << ".";
-    oss << std::setw(6) <<  std::setfill('0') << (us.count() % 1000000);
+    oss << std::setw(6) <<  std::setfill('0') << (us.count() % std::chrono::microseconds::period::den);
     return oss.str();
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ std::string to_string(std::chrono::nanoseconds ns)
     std::ostringstream oss;
     oss << to_string(std::chrono::duration_cast<std::chrono::seconds>(ns));
     oss << ".";
-    oss << std::setw(9) <<  std::setfill('0') << (ns.count() % 1000000000);
+    oss << std::setw(9) <<  std::setfill('0') << (ns.count() % std::chrono::nanoseconds::period::den);
     return oss.str();
 }
 ////////////////////////////////////////////////////////////////////////////////
