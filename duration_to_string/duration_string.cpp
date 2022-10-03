@@ -14,6 +14,16 @@ std::string to_string_impl(Duration dur)
     oss << std::setw(std::log10(Duration::period::den)) <<  std::setfill('0') << (dur.count() % Duration::period::den);
     return oss.str();
 }
+
+template<typename Duration1, typename Duration2>
+std::string to_string_impl(Duration2 dur)
+{
+    std::ostringstream oss;
+    oss << to_string(std::chrono::duration_cast<Duration1>(dur));
+    oss << ":";
+    oss << std::setw(2) << std::setfill('0') << (dur.count() % 60);
+    return oss.str();
+}
 ////////////////////////////////////////////////////////////////////////////////
 std::string to_string(std::chrono::hours hh)
 {
@@ -22,20 +32,12 @@ std::string to_string(std::chrono::hours hh)
 ////////////////////////////////////////////////////////////////////////////////
 std::string to_string(std::chrono::minutes mm)
 {
-    std::ostringstream oss;
-    oss << to_string(std::chrono::duration_cast<std::chrono::hours>(mm));
-    oss << ":";
-    oss << std::setw(2) << std::setfill('0') << (mm.count() % 60);
-    return oss.str();
+    return to_string_impl<std::chrono::hours>(mm);
 }
 ////////////////////////////////////////////////////////////////////////////////
 std::string to_string(std::chrono::seconds ss)
 {
-    std::ostringstream oss;
-    oss << to_string(std::chrono::duration_cast<std::chrono::minutes>(ss));
-    oss << ":";
-    oss << std::setw(2) <<  std::setfill('0') << (ss.count() % 60);
-    return oss.str();
+    return to_string_impl<std::chrono::minutes>(ss);
 }
 ////////////////////////////////////////////////////////////////////////////////
 std::string to_string(std::chrono::milliseconds ms)
