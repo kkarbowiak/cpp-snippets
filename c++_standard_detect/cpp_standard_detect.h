@@ -12,7 +12,9 @@
         #define CPP_11_PRESENT
     #endif
 #elif defined(__cplusplus)
-    #if __cplusplus >= 202002L
+    #if __cplusplus >= 202302L
+        #define CPP_23_PRESENT
+    #elif __cplusplus >= 202002L
         #define CPP_20_PRESENT
     #elif __cplusplus >= 201703L
         #define CPP_17_PRESENT
